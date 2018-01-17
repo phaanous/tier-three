@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
+    parameters {        
+        string(name: 'BRANCH_TO_BUILD', defaultValue: 'develop', description: 'The target branch')
+    }
+
     stages {
 
-        stage('Build Tier three') {                        
-            steps {
+        stage('Feature Build Tier Three') {
+
+            steps {                
                 echo 'Building..'
+                echo env.BRANCH_NAME
                 sleep(3) {
                     echo 'Waiting for 3 seconds'
                 }
@@ -14,12 +20,14 @@ pipeline {
         }
 
         stage('Test') {
+
             steps {
                 echo 'Testing..'
             }
         }
 
         stage('Deploy') {
+
             steps {
                 echo 'Deploying....'
             }
